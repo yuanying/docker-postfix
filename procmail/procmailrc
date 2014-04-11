@@ -1,0 +1,14 @@
+SHELL=/bin/bash
+PATH=/usr/bin:/bin
+DEFAULT=/var/vmail/$DOMAIN/$USER/Maildir/
+MAILDIR=${DEFAULT}
+LOGFILE=${DEFAULT}.procmail.log
+LOCKFILE=${DEFAULT}.procmail.lock
+VERBOSE=ON
+ 
+# :0fw
+# |/usr/bin/spamc
+
+:0
+* ? test -e "$MAILDIR/.procmailrc"
+| /usr/bin/procmail -t -m USER=$USER DOMAIN=$DOMAIN $MAILDIR/.procmailrc

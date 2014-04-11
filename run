@@ -1,0 +1,19 @@
+#!/bin/bash
+set -e
+
+sed -i "s/__REPLACE_DATABASE_HOST__/${MYSQL_PORT_3306_TCP_ADDR}/g" /etc/postfix/mysql-virtual-alias-maps.cf
+sed -i "s/__REPLACE_DATABASE_PORT__/${MYSQL_PORT_3306_TCP_PORT}/g" /etc/postfix/mysql-virtual-alias-maps.cf
+sed -i "s/__REPLACE_DATABASE_PASSWORD__/${POSTFIX_MYSQL_PASSWORD}/g" /etc/postfix/mysql-virtual-alias-maps.cf
+
+sed -i "s/__REPLACE_DATABASE_HOST__/${MYSQL_PORT_3306_TCP_ADDR}/g" /etc/postfix/mysql-virtual-domains-maps.cf
+sed -i "s/__REPLACE_DATABASE_PORT__/${MYSQL_PORT_3306_TCP_PORT}/g" /etc/postfix/mysql-virtual-domains-maps.cf
+sed -i "s/__REPLACE_DATABASE_PASSWORD__/${POSTFIX_MYSQL_PASSWORD}/g" /etc/postfix/mysql-virtual-domains-maps.cf
+
+sed -i "s/__REPLACE_DATABASE_HOST__/${MYSQL_PORT_3306_TCP_ADDR}/g" /etc/postfix/mysql-virtual-mailbox-maps.cf
+sed -i "s/__REPLACE_DATABASE_PORT__/${MYSQL_PORT_3306_TCP_PORT}/g" /etc/postfix/mysql-virtual-mailbox-maps.cf
+sed -i "s/__REPLACE_DATABASE_PASSWORD__/${POSTFIX_MYSQL_PASSWORD}/g" /etc/postfix/mysql-virtual-mailbox-maps.cf
+
+service syslog-ng start
+service postfix start
+tail -F /var/log/mail.log
+
