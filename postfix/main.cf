@@ -63,7 +63,7 @@ virtual_transport = procmail
 procmail_destination_recipient_limit = 1
 
 # Use amavis for virus and spam scanning
-# content_filter = smtp-amavis:[127.0.0.1]:10024
+content_filter = smtp-amavis:[127.0.0.1]:10024
 
 # Header manipulation
 # --------------------------------------

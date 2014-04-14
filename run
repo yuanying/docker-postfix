@@ -13,8 +13,17 @@ sed -i "s/__REPLACE_DATABASE_HOST__/${MYSQL_PORT_3306_TCP_ADDR}/g" /etc/postfix/
 sed -i "s/__REPLACE_DATABASE_PORT__/${MYSQL_PORT_3306_TCP_PORT}/g" /etc/postfix/mysql-virtual-mailbox-maps.cf
 sed -i "s/__REPLACE_DATABASE_PASSWORD__/${POSTFIX_MYSQL_PASSWORD}/g" /etc/postfix/mysql-virtual-mailbox-maps.cf
 
+sed -i "s/__REPLACE_DATABASE_HOST__/${MYSQL_PORT_3306_TCP_ADDR}/g" /etc/amavis/conf.d/50-user
+sed -i "s/__REPLACE_DATABASE_PORT__/${MYSQL_PORT_3306_TCP_PORT}/g" /etc/amavis/conf.d/50-user
+sed -i "s/__REPLACE_DATABASE_PASSWORD__/${POSTFIX_MYSQL_PASSWORD}/g" /etc/amavis/conf.d/50-user
+
 cron -f &
 service syslog-ng start
+service spamassassin start
+service clamav-daemon start
+service clamav-freshclam start
+service amavis start
 service postfix start
+
 tail -F /var/log/mail.log
 
