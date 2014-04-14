@@ -2,4 +2,4 @@ user     = postfix
 password = __REPLACE_DATABASE_PASSWORD__
 hosts    = __REPLACE_DATABASE_HOST__:__REPLACE_DATABASE_PORT__
 dbname   = postfix
-query    = SELECT description FROM domain WHERE domain='%s'
+query    = SELECT domain FROM domain WHERE domain='%s'
