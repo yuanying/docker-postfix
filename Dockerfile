@@ -17,6 +17,7 @@ RUN bash -c 'debconf-set-selections <<< "postfix postfix/main_mailer_type string
 RUN bash -c 'debconf-set-selections <<< "postfix postfix/mailname string mail.example.com"'
 
 RUN apt-get install -y postfix postfix-mysql postgrey syslog-ng procmail
+RUN apt-get install -y cron
 
 ADD postfix/header_checks /etc/postfix/header_checks
 ADD postfix/main.cf /etc/postfix/main.cf
